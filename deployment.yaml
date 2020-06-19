@@ -26,18 +26,14 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  annotations:
-  generation: 1
-  labels:
-    app: www
   name: www
   namespace: default
   spec:
-  rules:
-  - host: www.247nub.com
-    http:
-      paths:
-      - backend:
-          serviceName: www
-          servicePort: 80
+    rules:
+    - host: www.247nub.com
+      http:
+        paths:
+        - backend:
+            serviceName: www
+            servicePort: 80
  
