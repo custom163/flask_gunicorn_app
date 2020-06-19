@@ -5,4 +5,8 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: custom163/gc:v0.0.1
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
 notification: {}
