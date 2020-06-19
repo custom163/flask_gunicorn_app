@@ -9,9 +9,8 @@ stages:
   - name: Publish my image
     steps:
     - publishImageConfig:
-        dockerfilePath: ./dockerfile
+        dockerfilePath: ./Dockerfile
         buildContext: .
         tag: custom163/gc:v0.0.1
         # Optionally push to remote registry
-        pushRemote: true
-        registry: dockerhub.com
+        pushRemote: false
