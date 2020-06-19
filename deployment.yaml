@@ -1,47 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    workload.user.cattle.io/workloadselector: deployment-default-www
   name: www
   namespace: default
 spec:
+  selector:
+    matchLables:
+      app: www
   replicas: 1
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-    type: RollingUpdate
   template:
     metadata:
-      annotations:
       labels:
         app: www
         version: v1
     spec:
       containers:
-      - image: docker-registry/custom163/gc
-        imagePullPolicy: Always
+      - image: docker-registry/custom163/gc:0.0.1
         name: www
         ports:
         - containerPort: 80
           name: http
           protocol: TCP
-        resources: {}
-        securityContext:
-          allowPrivilegeEscalation: false
-          privileged: false
-          readOnlyRootFilesystem: false
-          runAsNonRoot: false
-        stdin: true
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        tty: true
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
+        
 ##########################################################
 apiVersion: extensions/v1beta1
 kind: Ingress
