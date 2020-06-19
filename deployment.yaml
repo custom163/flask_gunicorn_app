@@ -1,3 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: www
+spec:
+  selector:
+    app: www
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+######################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,7 +34,7 @@ spec:
       - name: www
         image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         ports:
-        - containerPort: 80 
+        - containerPort: 8080 
 ---
 ##########################################################
 apiVersion: extensions/v1beta1
