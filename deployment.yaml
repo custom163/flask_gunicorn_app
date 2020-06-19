@@ -18,7 +18,7 @@ spec:
       - name: pipeline-docker-registry
       containers:
       - name: www
-        image: docker-registry/custom163/gc:0.0.1
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         ports:
         - containerPort: 80 
 ---
