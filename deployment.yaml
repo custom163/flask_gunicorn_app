@@ -2,38 +2,35 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: www
-  namespace: default
+  labels:
+    app: www
 spec:
-  selector:
-    matchLables:
-      app: www
   replicas: 1
+  selector:
+    matchLabels:
+      app: www
   template:
     metadata:
       labels:
         app: www
-        version: v1
     spec:
       containers:
-      - image: docker-registry/custom163/gc:0.0.1
-        name: www
+      - name: www
+        image: docker-registry/custom163/gc:0.0.1
         ports:
-        - containerPort: 80
-          name: http
-          protocol: TCP
-        
+        - containerPort: 80 
 ##########################################################
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: www
   namespace: default
-  spec:
-    rules:
-    - host: www.247nub.com
-      http:
-        paths:
-        - backend:
-            serviceName: www
-            servicePort: 80
+spec:
+  rules:
+  - host: www.247nub.com
+    http:
+      paths:
+      - backend:
+          serviceName: www
+          servicePort: 80
  
